@@ -78,7 +78,7 @@ export function decodeState(buffer) {
             return null;
         }
         const dims = view.getUint8(1);
-        if (dims < 3 || dims > 7) {
+        if (dims < 3 || dims > 8) {
             console.error('Tiling state decode: unsupported dimension');
             return null;
         }

@@ -1,7 +1,7 @@
 import { TilingView, TilingViewState, loadStateCode } from './tilingview.js';
 import { AxisControls, OffsetControls } from './controls.js';
 import { generateCutProj, generateMultigrid } from './tiling.js';
-import { generateWasm } from './tiling_wasm.js';
+// import { generateWasm } from './tiling_wasm.js';
 import { rotate } from './vector.js';
 
 class TilingApp {
@@ -108,7 +108,7 @@ class TilingApp {
         } else if (method === 'multigrid') {
             return generateMultigrid;
         } else if (method == 'wasm') {
-            return generateWasm;
+            return generateMultigrid; //generateWasm;
         } else {
             console.error("unknown tiling generator type:", method);
             return generateMultigrid;

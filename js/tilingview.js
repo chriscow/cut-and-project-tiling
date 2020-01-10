@@ -25,6 +25,7 @@ export class TilingViewState extends TilingState {
             5: ['#e8e8ff', '#808080', '#808080', '#e8e8ff'],
             6: ['#808080', '#c0c0c0', '#e8e8ff', '#c0c0c0', '#808080'],
             7: ['#c0c0c0', '#e8e8ff', '#808080', '#808080', '#e8e8ff', '#c0c0c0'],
+            8: ['#c0c0c0', '#e8e8ff', '#808080', '#808080', '#e8e8ff', '#c0c0c0', '#fefefe'],
         }[dims];
         this.colors = [];
         for (let i = 0; i < dims-1; i++) {

@@ -19,6 +19,9 @@ export class TilingState {
             this.basis[0][i] = f*Math.cos(g*i);
             this.basis[1][i] = f*Math.sin(g*i);
         }
+
+        // console.log("\initial basis[0]:" + this.basis[0]);
+        // console.log("\initial basis[1]:" + this.basis[1]);
         // this.basisTest();
     }
 
@@ -54,6 +57,7 @@ export class TilingState {
 
     moveAxis(changeAxis, x, y) {
         // Clamp u_i and v_i to inside the unit circle.
+        // console.log("[TilingState::moveAxis] axis:" + changeAxis + " [" + x + "," + y + "]");
         let unit_x = x;
         let unit_y = y;
         let k = Math.hypot(x, y);
@@ -68,15 +72,26 @@ export class TilingState {
         }
 
         // Convenient aliases for the basis vectors.
+        // console.log("\tcurrent basis[0]:" + this.basis[0]);
+        // console.log("\tcurrent basis[1]:" + this.basis[1]);
+
         let u = this.basis[0];
         let v = this.basis[1];
 
+        /// Compute k1 v1 + k2 v2, where k1/k2 are scalars and v1/v2 are vectors.
+        // export function combine(k1, v1, k2, v2)
+        // - - - - -
         // Rotate u and v so that u is nearly aligned with the change axis.
         const u1 = Vec.combine( unit_x, u, unit_y, v);
         const v1 = Vec.combine(-unit_y, u, unit_x, v);
         u = u1;
         v = v1;
 
+
+        /// Change v to have a norm of 1, BUT with the extra constraint
+        // that v[axis] = k (0 <= k <= 1).
+        // export function renormalize(v, axis, k) {
+        // - - - - -
         // Re-normalize v orthogonal to the change axis.
         Vec.renormalize(v, changeAxis, 0);
 
@@ -88,6 +103,8 @@ export class TilingState {
         this.basis[0] = Vec.combine(unit_x, u, -unit_y, v);
         this.basis[1] = Vec.combine(unit_y, u,  unit_x, v);
 
+        // console.log("\tNEW basis[0]:" + this.basis[0]);
+        // console.log("\tNEW basis[1]:" + this.basis[1]);
         // this.basisTest();
     }
 

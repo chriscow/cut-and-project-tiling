@@ -15,6 +15,7 @@ module.exports = {
   devServer: {
     contentBase: dist,
   },
+  devtool: "eval-source-map",
   plugins: [
     new WasmPackPlugin({
       crateDirectory: path.resolve(__dirname, "crate")
